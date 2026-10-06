@@ -118,7 +118,7 @@ export function Header() {
               target="_blank"
               rel="noopener noreferrer"
               $size="sm"
-              className="hidden shrink-0 whitespace-nowrap lg:inline-flex"
+              className="!hidden shrink-0 whitespace-nowrap lg:!inline-flex"
               onClick={() => track('whatsapp_click', { origin: 'header' })}
             >
               <MessageCircle size={16} strokeWidth={1.75} aria-hidden />
@@ -127,10 +127,10 @@ export function Header() {
             <button
               type="button"
               onClick={() => setOpen(true)}
-              aria-label="Abrir menu"
-              className="grid size-10 place-items-center rounded-full text-brand-deep transition-colors hover:bg-brand-mist lg:hidden"
+              aria-label="Abrir menu de navegação"
+              className="grid size-10 place-items-center rounded-full text-brand-deep transition-colors hover:bg-brand-mist active:scale-95 lg:!hidden"
             >
-              <Menu size={21} strokeWidth={1.6} aria-hidden />
+              <Menu size={22} strokeWidth={1.8} aria-hidden />
             </button>
           </div>
         </Island>
@@ -151,12 +151,12 @@ export function Header() {
               $variant="whatsapp"
               onClick={() => track('whatsapp_click', { origin: 'menu' })}
             >
-              <MessageCircle size={17} strokeWidth={1.75} aria-hidden />
+              <MessageCircle size={18} strokeWidth={1.75} aria-hidden />
               Falar no WhatsApp
             </Button>
             <a
               href={`tel:${site.phones[0].tel}`}
-              className="flex items-center justify-center gap-2 py-1 text-sm text-stone"
+              className="flex items-center justify-center gap-2 py-1 text-sm font-medium text-stone transition-colors hover:text-brand-deep"
               onClick={() => track('contact_click', { origin: 'menu', channel: 'phone' })}
             >
               <Phone size={15} strokeWidth={1.75} aria-hidden />
@@ -172,17 +172,18 @@ export function Header() {
                 <NavLink
                   to={item.to}
                   end={item.to === '/'}
+                  onClick={() => setOpen(false)}
                   className={({ isActive }) =>
                     cn(
-                      'flex items-center justify-between py-4 text-[1.375rem] font-medium tracking-tight text-brand-deep/80',
-                      isActive && 'text-brand-deep',
+                      'flex items-center justify-between py-4 text-[1.25rem] font-medium tracking-tight text-brand-deep/80 transition-colors hover:text-brand-deep',
+                      isActive && 'text-brand-deep font-semibold',
                     )
                   }
                 >
                   {({ isActive }) => (
                     <>
-                      {item.label}
-                      {isActive && <span className="size-1.5 rounded-full bg-gold" aria-hidden />}
+                      <span>{item.label}</span>
+                      {isActive && <span className="size-2 rounded-full bg-gold" aria-hidden />}
                     </>
                   )}
                 </NavLink>
