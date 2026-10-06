@@ -37,6 +37,14 @@ export default function App() {
               }
             />
             <Route
+              path="imovel/:slug"
+              element={
+                <Suspense fallback={<PropertyDetailSkeleton />}>
+                  <PropertyDetail />
+                </Suspense>
+              }
+            />
+            <Route
               path="imoveis/:slug"
               element={
                 <Suspense fallback={<PropertyDetailSkeleton />}>
